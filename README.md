@@ -2,7 +2,8 @@
   <img src="assets/opennexus-agents-banner.png" alt="OpenNexus agents banner" />
 </p>
 
-<h3 align="center">OpenNexus agents</h2>
+<h3 align="center">OpenNexus agents</h3>
+<h4 align="center"> (changed from openjarvis)</h4>
 
 
 
