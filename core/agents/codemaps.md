@@ -51,7 +51,7 @@ Agent behavior guidelines...
 
 ## Naming Conventions
 
-- **Filenames**: Lowercase with hyphens (e.g., `deep-explorer.md`, `openbrainstorm.md`)
+- **Filenames**: Lowercase with hyphens (e.g., `deep-explorer.md`, `OpenBrainstorm.md`)
 - **IDs**: Must match filename without extension
 - **Display Names**: PascalCase with spaces (defined in `registry.jsonc`)
 

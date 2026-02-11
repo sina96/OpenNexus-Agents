@@ -22,6 +22,6 @@ If applicable, add screenshots or paste the terminal output here.
 **Environment (please complete the following):**
  - OS: [e.g. macOS, Linux, Windows WSL]
  - OpenCode Version:
- - Agent/Subagent involved: [e.g. OpenJarvis, OpenCoder]
+ - Agent/Subagent involved: [e.g. opennexus, OpenCoder]
 **Additional context**
 Add any other context about the problem here.

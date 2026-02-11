@@ -4,11 +4,11 @@
   "components": {
     "agents": [
       {
-        "id": "openjarvis",
-        "name": "OpenJarvis",
+        "id": "opennexus",
+        "name": "OpenNexus",
         "description": "Orchestrator that delegates to specialists for optimal quality/speed/cost",
         "type": "opencode-agent-markdown",
-        "path": "core/agents/primary/openjarvis.md",
+        "path": "core/agents/primary/opennexus.md",
         "dependencies": [
           "context-manager",
           "deep-explorer",
@@ -280,7 +280,7 @@
         "type": "opencode-command-markdown",
         "path": "core/commands/orchestrate.md",
         "dependencies": [
-          "openjarvis"
+          "opennexus"
         ]
       },
       {

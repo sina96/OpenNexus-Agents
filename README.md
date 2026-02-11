@@ -1,12 +1,12 @@
 <p align="center">
-  <img src="assets/openjarvis-banner.png" alt="OpenJarvis banner" />
+  <img src="assets/opennexus-agents-banner.png" alt="OpenNexus agents banner" />
 </p>
 
-<h3 align="center">OpenJarvis agents</h2>
+<h3 align="center">OpenNexus agents</h2>
 
 
 
-<p align="center">Orchastration, coding, planning and brainstorming agents with a pack of subagents, skills and commands</p>
+<p align="center">Orchestration, coding, planning and brainstorming agents with a pack of subagents, skills and commands</p>
 <h4 align="center">version 0.1.0</h4>
 
 <p align="center">
@@ -15,9 +15,15 @@
 </a>
 <p>
 
-# OpenJarvis Agents Repository
+# OpenNexus Agents Repository
 
 A comprehensive collection of AI agents, subagents, commands, and skills for the OpenCode AI coding assistant. This repository provides a modular, extensible framework for intelligent code assistance, from implementation and refactoring to planning and orchestration.
+
+**What's included:**
+- **4 Primary Agents** - User-facing agents for orchestration, coding, brainstorming, and planning
+- **13 Subagents** - Specialized workers for exploration, review, testing, implementation, and more
+- **11 Commands** - Custom workflows for checkpoints, planning, documentation, and automation
+- **4 Skills** - Reusable instruction modules for task management, git operations, coding standards, and iterative retrieval
 
 ## Pre-installation Requirements
 
@@ -34,7 +40,7 @@ Before installing, ensure you have the following dependencies:
 For quick setup and CI/automation, use this one-liner to install all components non-interactively:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main/install.sh | bash -s -- --non-interactive-all
+curl -fsSL https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main/install.sh | bash -s -- --non-interactive-all
 ```
 
 > **Note:** This installs agents, subagents, commands, skills, and all other components without prompts. Suitable for quick setup and CI/automation. By default, non-interactive installation installs to the local project directory (`current-directory/.opencode`).
@@ -97,7 +103,7 @@ Primary agents are user-facing and designed to start conversations. They handle 
 
 | Name | Temperature | Description |
 |------|-------------|-------------|
-| **OpenJarvis** | 0.2 |  Orchestrator that delegates to specialists for optimal quality/speed/cost |
+| **OpenNexus** | 0.2 | Orchestrator that delegates to specialists for optimal quality/speed/cost |
 | **OpenCoder** | 0.2 | Coding agent for implementation and refactors |
 | **OpenBrainstorm** | 0.8 | Brainstorming creative agent for generating ideas, asking clarifying questions, and exploring options |
 | **OpenPlanner** | 0.1 | Planning agent for analysis, design, and step-by-step plans |
@@ -154,16 +160,17 @@ Skills are reusable instruction modules that provide domain-specific workflows a
 ## Repository Structure
 
 ```
-opencoders-basic/
+OpenNexus-Agents/
 ├── core/
 │   ├── agents/
-│   │   ├── primary/      # Primary agents (opencoder, openbrainstorm, etc.)
+│   │   ├── primary/      # Primary agents (OpenCoder, OpenBrainstorm, etc.)
 │   │   └── subagents/    # Subagents (deep-explorer, reviewer, tester, etc.)
 │   ├── commands/         # Custom commands (installed into .opencode/commands)
 │   └── skills/           # Reusable skill modules (installed into .opencode/skills)
 ├── .opencode/            # Installed agents (auto-generated, gitignored)
 ├── install.sh            # Installation script
 ├── registry.jsonc        # Component registry (JSONC with comments allowed)
+├── opencode.jsonc        # Project config (sets default_agent to opennexus)
 └── AGENTS.md             # Agent documentation and guidelines
 ```
 
@@ -173,7 +180,7 @@ After installation, invoke agents using the OpenCode CLI:
 
 ```bash
 # Start a conversation with a primary agent
-opencode chat @opencoder "Implement user authentication"
+opencode chat @OpenCoder "Implement user authentication"
 
 # Use a command
 opencode run checkpoint
@@ -282,7 +289,7 @@ model: openai/gpt-4o-mini
 model: anthropic/claude-sonnet-4-5
 
 # Fast brainstorming - use balanced model
-# core/agents/primary/openbrainstorm.md
+# core/agents/primary/OpenBrainstorm.md
 model: google/gemini-2.5-flash
 
 # Critical security review - use most capable model
@@ -301,8 +308,8 @@ model: anthropic/claude-sonnet-4-5
 **Use premium models for:**
 - Complex refactoring (`senior-coder`)
 - Security and correctness review (`reviewer`)
-- Architecture decisions (`openplanner`)
-- Multi-agent orchestration (`openjarvis`)
+- Architecture decisions (`OpenPlanner`)
+- Multi-agent orchestration (`OpenNexus`)
 
 **Temperature settings also matter:**
 - **0.0-0.2**: Precision tasks (testing, reviewing, implementing specs)

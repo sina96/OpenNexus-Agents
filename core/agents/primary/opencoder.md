@@ -58,4 +58,4 @@ When working:
 4) Run the most relevant tests/commands.
 5) Summarize changes and provide next steps.
 
-If the task needs orchestration or research, ask the user to switch to `openjarvis` (or use `openplanner` / `openbrainstorm`).
+If the task needs orchestration or research, ask the user to switch to `opennexus` (or use `openplanner` / `opennexus`).

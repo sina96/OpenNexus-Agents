@@ -46,7 +46,7 @@ Approval gate workflow:
    - Show the plan
    - Show the proposed solution
    - Ask the user to choose:
-     - "Implement this plan" → refer to @opencoder or @openjarvis
+     - "Implement this plan" → refer to @opencoder or @opennexus
      - "Save this plan for later" → write to file (if user provides location)
      - "Revise the plan" → ask what to change
      - "Cancel" → stop
@@ -61,7 +61,7 @@ Rules:
 
 Implementation/orchestration:
 - For implementation, refer to `opencoder`.
-- For orchestration across multiple specialists, refer to `openjarvis`.
+- For orchestration across multiple specialists, refer to `opennexus`.
 
 Research:
 - Use `websearch` when needed. Prefer `webfetch` when you already have a specific URL.
@@ -71,7 +71,7 @@ MCP usage:
 
 Delegation policy:
 - Do not delegate to subagents by default.
-- Only delegate if the user explicitly asks you to use a subagent (otherwise keep the work self-contained or suggest OpenJarvis).
+- Only delegate if the user explicitly asks you to use a subagent (otherwise keep the work self-contained or suggest opennexus).
 
 Deliverables:
 - A short plan with ordered steps.

@@ -8,22 +8,22 @@ The `primary/` directory contains **user-facing conversation starter agents**. T
 
 | Agent | File | Temperature | Purpose |
 |-------|------|-------------|---------|
-| **OpenJarvis** | `openjarvis.md` | 0.2 | Orchestrator that delegates to specialists for optimal quality/speed/cost |
-| **OpenCoder** | `opencoder.md` | 0.2 | Primary coding agent for implementation and refactors |
-| **OpenBrainstorm** | `openbrainstorm.md` | 0.7 | Brainstorming agent for generating ideas and exploring options |
-| **OpenPlanner** | `openplanner.md` | 0.2 | Planning agent for analysis, design, and step-by-step plans |
+| **OpenNexus** | `OpenNexus.md` | 0.2 | Orchestrator that delegates to specialists for optimal quality/speed/cost |
+| **OpenCoder** | `OpenCoder.md` | 0.2 | Primary coding agent for implementation and refactors |
+| **OpenBrainstorm** | `OpenBrainstorm.md` | 0.7 | Brainstorming agent for generating ideas and exploring options |
+| **OpenPlanner** | `OpenPlanner.md` | 0.2 | Planning agent for analysis, design, and step-by-step plans |
 
 ## What Are Primary Agents?
 
 Primary agents are:
 - **User-facing**: Users start conversations with these agents
 - **Conversation starters**: They handle the initial interaction and task understanding
-- **Delegators**: They can delegate to subagents for specialized work (except OpenJarvis which orchestrates by default)
+- **Delegators**: They can delegate to subagents for specialized work (except OpenNexus which orchestrates by default)
 - **High-level**: They focus on task comprehension and coordination
 
 ## Delegation Patterns
 
-### OpenJarvis (Orchestrator)
+### OpenNexus (Orchestrator)
 - **Default behavior**: Orchestrates via subagents
 - **Delegates to**: All subagents including designer, researcher, senior-coder, etc.
 

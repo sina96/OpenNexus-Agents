@@ -3,7 +3,7 @@
   // Project-scoped OpenCode config.
   // Tip: commit this file so your whole team shares the same defaults.
   // Docs: https://opencode.ai/docs/config/#per-project
-  "default_agent": "openjarvis",
+  "default_agent": "opennexus",
   "agent": {
     "plan": {
       "hidden": true

@@ -27,7 +27,7 @@ if [ -n "${SCRIPT_SOURCE}" ] && [ -e "${SCRIPT_SOURCE}" ]; then
 else
   # Piped execution (curl | bash): download from GitHub
   SCRIPT_DIR=""
-  RAW_URL="${OPENCODE_RAW_URL:-https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main}"
+  RAW_URL="${OPENCODE_RAW_URL:-https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main}"
 fi
 
 REGISTRY_JSONC_EXPLICIT=false
@@ -160,7 +160,7 @@ Env:
   REGISTRY_JSONC       Path to registry.jsonc (default: ./registry.jsonc)
   OPENCODE_INSTALL_DIR Install destination directory (default: <target>/.opencode)
   OPENCODE_TARGET_DIR  Project root directory (default: cwd)
-  OPENCODE_RAW_URL     Base URL for remote file downloads (default: https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main)
+  OPENCODE_RAW_URL     Base URL for remote file downloads (default: https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main)
 EOF
 }
 
@@ -261,13 +261,13 @@ print_step() {
 print_header() {
   if [ "$COLOR_ENABLED" = true ]; then
     printf "%s%s============================================================%s\n" "$CYAN" "$BOLD" "$NC" >&2
-    printf "%s%sOpenJarvis Local Installer%s\n" "$CYAN" "$BOLD" "$NC" >&2
+    printf "%s%sOpenNexus Local Installer%s\n" "$CYAN" "$BOLD" "$NC" >&2
     printf "%sRepo:%s %s\n" "$DIM" "$NC" "$(basename "$SCRIPT_DIR")" >&2
     printf "%sPath:%s %s\n" "$DIM" "$NC" "$SCRIPT_DIR" >&2
     printf "%s%s============================================================%s\n" "$CYAN" "$BOLD" "$NC" >&2
   else
     printf "============================================================\n" >&2
-    printf "OpenJarvis Local Installer\n" >&2
+    printf "OpenNexus Local Installer\n" >&2
     printf "Repo: %s\n" "$(basename "$SCRIPT_DIR")" >&2
     printf "Path: %s\n" "$SCRIPT_DIR" >&2
     printf "============================================================\n" >&2
@@ -285,13 +285,15 @@ stage_start() {
 print_ascii_banner() {
   command -v clear >/dev/null 2>&1 && clear || true
   cat <<'ASCII'
-     ██╗██████╗ ██╗   ██╗███████╗
-     ██║██╔══██╗██║   ██║██╔════╝
-     ██║██████╔╝██║   ██║███████╗
-██   ██║██╔══██╗╚██╗ ██╔╝╚════██║
-╚█████╔╝██║  ██║ ╚████╔╝ ███████║
- ╚════╝ ╚═╝  ╚═╝  ╚═══╝  ╚══════╝
-        OpenJarvis v. 0.1.0                        
+M"""""""`YM M""MMMM""M MP""""""`MM 
+M  mmmm.  M M  `MM'  M M  mmmmm..M 
+M  MMMMM  M MM.    .MM M.      `YM 
+M  MMMMM  M M  .mm.  M MMMMMMM.  M 
+M  MMMMM  M M  MMMM  M M. .MMM'  M 
+M  MMMMM  M M  MMMM  M Mb.     .dM 
+MMMMMMMMMMM MMMMMMMMMM MMMMMMMMMMM 
+                                   
+    OpenNexus Agents v. 0.1.0                        
 ASCII
 }
 
@@ -1680,7 +1682,7 @@ write_project_config() {
   // Project-scoped OpenCode config.
   // Tip: commit this file so your whole team shares the same defaults.
   // Docs: https://opencode.ai/docs/config/#per-project
-  "default_agent": "openjarvis",
+  "default_agent": "opennexus",
   "agent": {
     "plan": {
       "hidden": true

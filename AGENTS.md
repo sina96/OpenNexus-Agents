@@ -20,10 +20,10 @@ For CI/automation, use non-interactive mode:
 ## Repository Structure
 
 ```
-opencoders-basic/
+OpenNexus-Agents/
 ├── core/
 │   ├── agents/
-│   │   ├── primary/      # Primary agents (opencoder, openbrainstorm, etc.)
+│   │   ├── primary/      # Primary agents (OpenCoder, OpenBrainstorm, etc.)
 │   │   └── subagents/    # Subagents (deep-explorer, reviewer, tester, etc.)
 │   ├── commands/         # Custom commands (installed into .opencode/commands)
 │   └── skills/           # Reusable skill modules (installed into .opencode/skills)
@@ -63,7 +63,7 @@ Behavior guidelines...
 
 Required fields: `description`, `mode` (primary/subagent), `temperature` (0.0-1.0), `tools` (write/edit/bash bools). Optional: `permission` for bash/task delegation.
 
-Temperature guide: 0.0-0.2 precision (tester, reviewer), 0.2-0.4 coding (opencoder), 0.6-0.8 brainstorming (openbrainstorm).
+Temperature guide: 0.0-0.2 precision (tester, reviewer), 0.2-0.4 coding (OpenCoder), 0.6-0.8 brainstorming (OpenBrainstorm).
 
 Agent body (30-70 lines): mission, behavior guidelines, rules/limitations, delegation patterns, output format. Use bullets, stay concise, reference via `@agent-name`.
 
@@ -74,7 +74,7 @@ Agent body (30-70 lines): mission, behavior guidelines, rules/limitations, deleg
 ## Naming Conventions
 
 ### Agent IDs and Filenames
-- Primary agents: lowercase with hyphens (`opencoder.md`, `openbrainstorm.md`)
+- Primary agents: lowercase with hyphens (`OpenCoder.md`, `OpenBrainstorm.md`)
 - Subagents: lowercase with hyphens (`deep-explorer.md`, `junior-coder.md`)
 - Filenames must match registry `id` field
 
@@ -85,12 +85,12 @@ Agent body (30-70 lines): mission, behavior guidelines, rules/limitations, deleg
 ### Agent Categories
 
 **Primary Agents** (user-facing, start conversations):
-- `openjarvis`: Orchestrator that delegates to specialists for best quality/speed/cost
-- `opencoder`: Implementation, refactors, bug fixes
-- `openbrainstorm`: Ideation, clarifying questions, exploring options
-- `openplanner`: Planning, analysis, step-by-step design
+- `OpenNexus`: Orchestrator that delegates to specialists for best quality/speed/cost
+- `OpenCoder`: Implementation, refactors, bug fixes
+- `OpenBrainstorm`: Ideation, clarifying questions, exploring options
+- `OpenPlanner`: Planning, analysis, step-by-step design
 
-Primary-agent delegation policy: `openjarvis` orchestrates via subagents by default. Other primary agents do not delegate unless explicitly asked.
+Primary-agent delegation policy: `OpenNexus` orchestrates via subagents by default. Other primary agents do not delegate unless explicitly asked.
 
 **Subagents** (delegated by primary agents):
 - `deep-explorer`: Read-only codebase discovery
@@ -112,8 +112,8 @@ Primary-agent delegation policy: `openjarvis` orchestrates via subagents by defa
 Agents declare dependencies in `registry.jsonc`. Circular dependencies should be avoided. Typical dependency graph:
 
 - Primary agents delegate to subagents
-- `opencoder` delegates to: `deep-explorer`, `reviewer`, `tester`, `junior-coder`, `senior-coder`, `task-manager`
-- `openbrainstorm` delegates to: `deep-explorer`, `reviewer`, `task-manager`, `requirement-manager`
+- `OpenCoder` delegates to: `deep-explorer`, `reviewer`, `tester`, `junior-coder`, `senior-coder`, `task-manager`
+- `OpenBrainstorm` delegates to: `deep-explorer`, `reviewer`, `task-manager`, `requirement-manager`
 
 ## Bash Permission Guidelines
 
@@ -140,6 +140,10 @@ Skills are reusable instruction modules that provide domain-specific workflows. 
 - `coding-standards`: Universal coding standards and best practices for TypeScript, JavaScript, React, and Node.js development
 - `iterative-retrieval`: Pattern for progressively refining context retrieval to solve the subagent context problem
 
+Each skill directory contains:
+- `SKILL.md`: Main skill instructions and workflows
+- `codemaps.md`: Code structure and implementation details
+
 Skills are loaded via the `skill` tool and inject detailed instructions into the conversation context.
 
 ## Commands
@@ -156,6 +160,7 @@ Custom commands extend OpenCode functionality. Located in `core/commands/` and i
 - `format-files`: Format files using OpenCode formatters
 - `learn`: Extract patterns and learnings from current session
 - `add-skill`: Create a new skill doc under .opencode/skills/
+- `create-jira-ticket`: Create a new Jira ticket from task requirements
 
 Commands are invoked via the OpenCode CLI or within agent workflows.
 

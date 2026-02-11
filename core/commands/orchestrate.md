@@ -1,6 +1,6 @@
 ---
 description: Orchestrate multiple agents for complex tasks
-agent: openjarvis
+agent: opennexus
 ---
 
 # Orchestrate
