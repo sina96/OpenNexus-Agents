@@ -1838,6 +1838,7 @@ main() {
   print_success "Installation complete"
   print_info "OpenCode will load agents from: ${PRIMARY_AGENTS_DIR}"
   print_info "Subagents installed to: ${SUBAGENTS_DIR}"
+  print_info "If you want to hide any agents, you can edit the local/global opencode config file and set them as hidden: true"
   print_info "Next: restart OpenCode or reload config." 
 }
 
