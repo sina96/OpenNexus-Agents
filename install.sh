@@ -16,8 +16,36 @@ set -euo pipefail
 #------------------------------------------------------------------------------
 # Paths and installation directories
 #------------------------------------------------------------------------------
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REGISTRY_JSONC="${REGISTRY_JSONC:-${SCRIPT_DIR}/registry.jsonc}"
+# NOTE: This installer supports being executed via `curl ... | bash -s -- ...`.
+# In that mode, bash may not populate BASH_SOURCE[0], so we must guard it under
+# `set -u` and fall back to downloading from GitHub raw URLs.
+SCRIPT_SOURCE="${BASH_SOURCE[0]-}"
+if [ -n "${SCRIPT_SOURCE}" ] && [ -e "${SCRIPT_SOURCE}" ]; then
+  SCRIPT_DIR="$(cd "$(dirname "${SCRIPT_SOURCE}")" && pwd)"
+  # Local execution: use local files
+  RAW_URL=""
+else
+  # Piped execution (curl | bash): download from GitHub
+  SCRIPT_DIR=""
+  RAW_URL="${OPENCODE_RAW_URL:-https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main}"
+fi
+
+REGISTRY_JSONC_EXPLICIT=false
+if [ -n "${REGISTRY_JSONC:-}" ]; then
+  REGISTRY_JSONC_EXPLICIT=true
+fi
+
+# Set registry source: local file if available, otherwise download from GitHub
+if [ -n "${SCRIPT_DIR}" ] && [ -f "${SCRIPT_DIR}/registry.jsonc" ]; then
+  REGISTRY_JSONC="${SCRIPT_DIR}/registry.jsonc"
+else
+  # Download registry to temp file
+  REGISTRY_JSONC="$(mktemp -t opencode-registry.XXXXXX.jsonc)"
+  if ! curl -fsSL "${RAW_URL}/registry.jsonc" -o "${REGISTRY_JSONC}"; then
+    echo "Error: Failed to download registry.jsonc from ${RAW_URL}" >&2
+    exit 1
+  fi
+fi
 
 # Project root directory.
 # - Used for project-scoped updates (.gitignore + optional opencode.jsonc)
@@ -92,6 +120,11 @@ cleanup() {
   if [ -n "${TMP_JSON}" ] && [ -f "${TMP_JSON}" ]; then
     rm -f "${TMP_JSON}" 2>/dev/null || true
   fi
+
+  # Clean up downloaded registry file when running via curl
+  if [ -n "${RAW_URL}" ] && [ -n "${REGISTRY_JSONC}" ] && [ -f "${REGISTRY_JSONC}" ]; then
+    rm -f "${REGISTRY_JSONC}" 2>/dev/null || true
+  fi
 }
 
 trap cleanup EXIT
@@ -127,6 +160,7 @@ Env:
   REGISTRY_JSONC       Path to registry.jsonc (default: ./registry.jsonc)
   OPENCODE_INSTALL_DIR Install destination directory (default: <target>/.opencode)
   OPENCODE_TARGET_DIR  Project root directory (default: cwd)
+  OPENCODE_RAW_URL     Base URL for remote file downloads (default: https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main)
 EOF
 }
 
@@ -810,13 +844,7 @@ copy_one() {
   local dest_name="$2"
   local dest_dir="$3"
 
-  local src_abs="${SCRIPT_DIR}/${src_rel}"
   local dest_abs="${dest_dir}/${dest_name}"
-
-  if [ ! -f "$src_abs" ]; then
-    echo "Error: source file not found: $src_rel" >&2
-    return 1
-  fi
 
   if [ -f "$dest_abs" ]; then
     case "$STRATEGY" in
@@ -843,7 +871,24 @@ copy_one() {
   fi
 
   mkdir -p "$(dirname "$dest_abs")"
-  cp -p "$src_abs" "$dest_abs"
+
+  # When running via curl | bash, download from GitHub raw URLs
+  if [ -n "${RAW_URL}" ]; then
+    local url="${RAW_URL}/${src_rel}"
+    if ! curl -fsSL "$url" -o "$dest_abs"; then
+      echo "Error: failed to download: $url" >&2
+      return 1
+    fi
+  else
+    # Local execution: copy from local filesystem
+    local src_abs="${SCRIPT_DIR}/${src_rel}"
+    if [ ! -f "$src_abs" ]; then
+      echo "Error: source file not found: $src_rel" >&2
+      return 1
+    fi
+    cp -p "$src_abs" "$dest_abs"
+  fi
+
   echo "install ${dest_abs}"
 }
 
@@ -920,27 +965,34 @@ install_skills() {
 
     local src_dir_rel
     src_dir_rel="${path%/*}"
-    local src_dir_abs
-    src_dir_abs="${SCRIPT_DIR}/${src_dir_rel}"
-    if [ ! -d "$src_dir_abs" ]; then
-      print_err "skill source directory not found: ${src_dir_rel}"
-      return 1
-    fi
-
     local dest_root
     dest_root="${SKILLS_DIR}/${id}"
 
-    # Copy all files under the skill directory (preserve structure).
-    local f rel src_rel dest_dir dest_name
-    while IFS= read -r f; do
-      [ -z "${f:-}" ] && continue
-      rel="${f#${src_dir_abs}/}"
-      src_rel="${f#${SCRIPT_DIR}/}"
-      dest_dir="${dest_root}/$(dirname "$rel")"
-      dest_name="$(basename "$rel")"
-      copy_one "$src_rel" "$dest_name" "$dest_dir"
-      installed_any=true
-    done < <(find "$src_dir_abs" -type f -print)
+    if [ -n "${RAW_URL}" ]; then
+      # Remote mode: download known skill files (SKILL.md and optional codemaps.md)
+      copy_one "${src_dir_rel}/SKILL.md" "SKILL.md" "$dest_root" && installed_any=true
+      # Try to download codemaps.md if it exists (best effort)
+      curl -fsSL "${RAW_URL}/${src_dir_rel}/codemaps.md" -o "${dest_root}/codemaps.md" 2>/dev/null || true
+    else
+      # Local mode: copy all files from the skill directory
+      local src_dir_abs
+      src_dir_abs="${SCRIPT_DIR}/${src_dir_rel}"
+      if [ ! -d "$src_dir_abs" ]; then
+        print_err "skill source directory not found: ${src_dir_rel}"
+        return 1
+      fi
+
+      local f rel src_rel dest_dir dest_name
+      while IFS= read -r f; do
+        [ -z "${f:-}" ] && continue
+        rel="${f#${src_dir_abs}/}"
+        src_rel="${f#${SCRIPT_DIR}/}"
+        dest_dir="${dest_root}/$(dirname "$rel")"
+        dest_name="$(basename "$rel")"
+        copy_one "$src_rel" "$dest_name" "$dest_dir"
+        installed_any=true
+      done < <(find "$src_dir_abs" -type f -print)
+    fi
   done <<< "$lines"
 
   if [ "$installed_any" = true ]; then
