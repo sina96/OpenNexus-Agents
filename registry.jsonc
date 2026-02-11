@@ -1,0 +1,383 @@
+{
+  // Component registry for install.sh and future automation.
+  // JSONC is allowed (comments + trailing commas).
+  "components": {
+    "agents": [
+      {
+        "id": "openjarvis",
+        "name": "OpenJarvis",
+        "description": "Orchestrator that delegates to specialists for optimal quality/speed/cost",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/primary/openjarvis.md",
+        "dependencies": [
+          "context-manager",
+          "deep-explorer",
+          "designer",
+          "doc-updater",
+          "junior-coder",
+          "markdown-handler",
+          "refactor-cleaner",
+          "requirement-manager",
+          "researcher",
+          "reviewer",
+          "senior-coder",
+          "task-manager",
+          "tester"
+        ],
+        "model-recommendation": {
+          "anthropic-pro": "anthropic/claude-sonnet-4-5",
+          "anthropic-max": "anthropic/claude-sonnet-4-5",
+          "openai": "openai/gpt-5.2",
+          "opencode-zed": "opencode/glm-4.7",
+          "synthetic": "synthetic/hf:zai-org/GLM-4.7",
+          "google": "google/gemini-3-pro-preview",
+          "openrouter": "openrouter/anthropic/claude-sonnet-4-5"
+        },
+        "free-model-recommendation": "opencode/minimax-m2.1-free"
+      },
+      {
+        "id": "openplanner",
+        "name": "OpenPlanner",
+        "description": "Planning agent for analysis, design, and step-by-step plans",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/primary/openplanner.md",
+        "dependencies": [
+          "deep-explorer",
+          "reviewer",
+          "task-manager",
+          "context-manager",
+          "markdown-handler"
+        ],
+        "model-recommendation": {
+          "anthropic-pro": "anthropic/claude-opus-4-5",
+          "anthropic-max": "anthropic/claude-opus-4-6",
+          "openai": "openai/gpt-5.2-codex",
+          "opencode-zed": "opencode/claude-opus-4-5",
+          "synthetic": "synthetic/hf:zai-org/GLM-4.7",
+          "google": "google/gemini-3-pro-preview",
+          "openrouter": "openrouter/anthropic/claude-opus-4-5"
+        },
+        "free-model-recommendation": "opencode/minimax-m2.1-free"
+      },
+      {
+        "id": "opencoder",
+        "name": "Opencoder",
+        "description": "Coding agent for implementation and refactors",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/primary/opencoder.md",
+        "dependencies": [
+          "deep-explorer",
+          "reviewer",
+          "tester",
+          "junior-coder",
+          "senior-coder",
+          "task-manager",
+          "context-manager",
+          "markdown-handler"
+        ],
+        "model-recommendation": {
+          // Fill these in with your preferred models per provider/tier.
+          "anthropic-pro": "anthropic/claude-sonnet-4-5",
+          "anthropic-max": "anthropic/claude-sonnet-4-5",
+          "openai": "openai/gpt-5.2",
+          "opencode-zed": "opencode/glm-4.7",
+          "synthetic": "synthetic/hf:zai-org/GLM-4.7",
+          "google": "google/gemini-3-pro-preview",
+          "openrouter": "openrouter/anthropic/claude-sonnet-4-5"
+        },
+        "free-model-recommendation": "opencode/minimax-m2.1-free"
+      },
+      {
+        "id": "openbrainstorm",
+        "name": "OpenBrainstorm",
+        "description": "Brainstorming creative agent for generating ideas, asking clarifying questions, and exploring options",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/primary/openbrainstorm.md",
+        "dependencies": [
+          "deep-explorer",
+          "reviewer",
+          "task-manager",
+          "context-manager"
+        ],
+        "model-recommendation": {
+          "anthropic-pro": "anthropic/claude-haiku-4-5",
+          "anthropic-max": "anthropic/claude-haiku-4-5",
+          "openai": "openai/gpt-5.1",
+          "opencode-zed": "opencode/minimax-m2.1",
+          "synthetic": "synthetic/hf:zai-org/GLM-4.5",
+          "google": "google/gemini-2.5-flash",
+          "openrouter": "openrouter/anthropic/claude-haiku-4-5"
+        },
+        "free-model-recommendation": "opencode/big-pickle"
+      }
+    ],
+
+    "subagents": [
+      {
+        "id": "context-manager",
+        "name": "Context Manager",
+        "description": "Produces compact summaries, context pruning suggestions, and handoff notes",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/context-manager.md",
+        "dependencies": []
+      },
+      {
+        "id": "deep-explorer",
+        "name": "Deep Explorer",
+        "description": "Read-only codebase explorer for locating files, flows, and dependencies",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/deep-explorer.md",
+        "dependencies": []
+      },
+      {
+        "id": "designer",
+        "name": "Designer",
+        "description": "UI/UX design and frontend polish",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/designer.md",
+        "dependencies": []
+      },
+      {
+        "id": "doc-updater",
+        "name": "Doc Updater",
+        "description": "Updates project documentation to match code and behavior",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/doc-updater.md",
+        "dependencies": [
+          "markdown-handler"
+        ]
+      },
+      {
+        "id": "junior-coder",
+        "name": "Junior Coder",
+        "description": "Implements small, well-scoped changes safely (low-risk edits only)",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/junior-coder.md",
+        "dependencies": []
+      },
+      {
+        "id": "markdown-handler",
+        "name": "Markdown Handler",
+        "description": "Creates or updates markdown files and validates frontmatter YAML",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/markdown-handler.md",
+        "dependencies": []
+      },
+      {
+        "id": "refactor-cleaner",
+        "name": "Refactor Cleaner",
+        "description": "Refactoring specialist for dead code removal, duplication cleanup, and dependency pruning",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/refactor-cleaner.md",
+        "dependencies": []
+      },
+      {
+        "id": "researcher",
+        "name": "Researcher",
+        "description": "Web research specialist for official docs, GitHub examples, and external references",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/researcher.md",
+        "dependencies": []
+      },
+      {
+        "id": "reviewer",
+        "name": "Reviewer",
+        "description": "Read-only code reviewer focused on correctness, security, and maintainability",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/reviewer.md",
+        "dependencies": []
+      },
+      {
+        "id": "requirement-manager",
+        "name": "Requirement Manager",
+        "description": "Creates clear product requirements and tickets for Jira/Trello/GitHub Issues (scrum/kanban)",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/requirement-manager.md",
+        "dependencies": [
+          "deep-explorer",
+          "markdown-handler"
+        ]
+      },
+      {
+        "id": "senior-coder",
+        "name": "Senior Coder",
+        "description": "Handles complex refactors, multi-file changes, and architecture-level implementation",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/senior-coder.md",
+        "dependencies": []
+      },
+      {
+        "id": "task-manager",
+        "name": "Task Manager",
+        "description": "Breaks work into executable steps with sequencing, risks, and acceptance criteria",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/task-manager.md",
+        "dependencies": []
+      },
+      {
+        "id": "tester",
+        "name": "Tester",
+        "description": "Runs tests/linters/builds and triages failures into actionable fixes",
+        "type": "opencode-agent-markdown",
+        "path": "core/agents/subagents/tester.md",
+        "dependencies": []
+      }
+    ],
+
+    "commands": [
+      {
+        "id": "checkpoint",
+        "name": "Checkpoint",
+        "description": "Save verification state and progress checkpoint",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/checkpoint.md",
+        "dependencies": []
+      },
+      {
+        "id": "implement-plan",
+        "name": "Implement Plan",
+        "description": "Implement a saved plan from .opencode/plans/",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/implement-plan.md",
+        "dependencies": [
+          "opencoder"
+        ]
+      },
+      {
+        "id": "update-init",
+        "name": "Update Init",
+        "description": "Scan the project and update AGENTS.md for OpenCode",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/update-init.md",
+        "dependencies": [
+          "opencoder"
+        ]
+      },
+      {
+        "id": "refactor-clean",
+        "name": "Refactor Clean",
+        "description": "Remove dead code and consolidate duplicates",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/refactor-clean.md",
+        "dependencies": [
+          "refactor-cleaner"
+        ]
+      },
+      {
+        "id": "code-review",
+        "name": "Code Review",
+        "description": "Review code for quality, security, and maintainability",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/code-review.md",
+        "dependencies": [
+          "reviewer"
+        ]
+      },
+      {
+        "id": "orchestrate",
+        "name": "Orchestrate",
+        "description": "Orchestrate multiple agents for complex tasks",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/orchestrate.md",
+        "dependencies": [
+          "openjarvis"
+        ]
+      },
+      {
+        "id": "update-docs",
+        "name": "Update Docs",
+        "description": "Update documentation for recent changes",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/update-docs.md",
+        "dependencies": [
+          "doc-updater"
+        ]
+      },
+      {
+        "id": "format-files",
+        "name": "Format Files",
+        "description": "Format files using available OpenCode formatters",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/format-files.md",
+        "dependencies": [
+          "junior-coder"
+        ]
+      },
+      {
+        "id": "learn",
+        "name": "Learn",
+        "description": "Extract patterns and learnings from current session",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/learn.md",
+        "dependencies": [
+          "context-manager",
+          "markdown-handler"
+        ]
+      },
+      {
+        "id": "add-skill",
+        "name": "Add Skill",
+        "description": "Create a new skill doc under .opencode/skills/",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/add-skill.md",
+        "dependencies": [
+          "opencoder"
+        ]
+      },
+      {
+        "id": "create-jira-ticket",
+        "name": "Create Jira Ticket",
+        "description": "Create a Jira-style ticket from user requirements with scope and issues",
+        "type": "opencode-command-markdown",
+        "path": "core/commands/create-jira-ticket.md",
+        "dependencies": [
+          "requirement-manager",
+          "deep-explorer"
+        ]
+      }
+    ],
+    "tools": [
+      // Empty for now.
+    ],
+    "skills": [
+      {
+        "id": "task-management",
+        "name": "Task Management",
+        "description": "Task management CLI for tracking and managing feature subtasks with status, dependencies, and validation",
+        "type": "opencode-skill-markdown",
+        "path": "core/skills/task-management/SKILL.md",
+        "dependencies": []
+      },
+      {
+        "id": "git-master",
+        "name": "Git Master",
+        "description": "MUST USE for ANY git operations. Atomic commits, rebase/squash, history search (blame, bisect, log -S).",
+        "type": "opencode-skill-markdown",
+        "path": "core/skills/git-master/SKILL.md",
+        "dependencies": []
+      },
+      {
+        "id": "coding-standards",
+        "name": "Coding Standards",
+        "description": "Universal coding standards, best practices, and patterns for TypeScript, JavaScript, React, and Node.js development.",
+        "type": "opencode-skill-markdown",
+        "path": "core/skills/coding-standards/SKILL.md",
+        "dependencies": []
+      },
+      {
+        "id": "iterative-retrieval",
+        "name": "Iterative Retrieval",
+        "description": "Pattern for progressively refining context retrieval to solve the subagent context problem",
+        "type": "opencode-skill-markdown",
+        "path": "core/skills/iterative-retrieval/SKILL.md",
+        "dependencies": []
+      }
+    ],
+    "plugins": [
+      // Empty for now.
+    ],
+    "mcps": [
+      "context7", "gh_grep"
+    ]
+  }
+}
