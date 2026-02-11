@@ -6,7 +6,7 @@
 
 
 
-<p align="center">Orchastration, coding, planning and brainstorming agents with a pack of subagents, skills and commands</p>
+<p align="center">Orchestration, coding, planning and brainstorming agents with a pack of subagents, skills and commands</p>
 <h4 align="center">version 0.1.0</h4>
 
 <p align="center">
@@ -18,6 +18,12 @@
 # OpenNexus Agents Repository
 
 A comprehensive collection of AI agents, subagents, commands, and skills for the OpenCode AI coding assistant. This repository provides a modular, extensible framework for intelligent code assistance, from implementation and refactoring to planning and orchestration.
+
+**What's included:**
+- **4 Primary Agents** - User-facing agents for orchestration, coding, brainstorming, and planning
+- **13 Subagents** - Specialized workers for exploration, review, testing, implementation, and more
+- **11 Commands** - Custom workflows for checkpoints, planning, documentation, and automation
+- **4 Skills** - Reusable instruction modules for task management, git operations, coding standards, and iterative retrieval
 
 ## Pre-installation Requirements
 
@@ -97,7 +103,7 @@ Primary agents are user-facing and designed to start conversations. They handle 
 
 | Name | Temperature | Description |
 |------|-------------|-------------|
-| **OpenNexus** | 0.2 |  Orchestrator that delegates to specialists for optimal quality/speed/cost |
+| **OpenNexus** | 0.2 | Orchestrator that delegates to specialists for optimal quality/speed/cost |
 | **OpenCoder** | 0.2 | Coding agent for implementation and refactors |
 | **OpenBrainstorm** | 0.8 | Brainstorming creative agent for generating ideas, asking clarifying questions, and exploring options |
 | **OpenPlanner** | 0.1 | Planning agent for analysis, design, and step-by-step plans |
@@ -154,7 +160,7 @@ Skills are reusable instruction modules that provide domain-specific workflows a
 ## Repository Structure
 
 ```
-OpenCoders-basic/
+OpenNexus-Agents/
 ├── core/
 │   ├── agents/
 │   │   ├── primary/      # Primary agents (OpenCoder, OpenBrainstorm, etc.)
@@ -164,6 +170,7 @@ OpenCoders-basic/
 ├── .opencode/            # Installed agents (auto-generated, gitignored)
 ├── install.sh            # Installation script
 ├── registry.jsonc        # Component registry (JSONC with comments allowed)
+├── opencode.jsonc        # Project config (sets default_agent to opennexus)
 └── AGENTS.md             # Agent documentation and guidelines
 ```
 

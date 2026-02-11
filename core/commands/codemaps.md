@@ -4,7 +4,7 @@
 
 The `commands/` directory contains **custom OpenCode CLI extensions**. These commands extend the OpenCode functionality and can be invoked via the OpenCode CLI or within agent workflows.
 
-## Commands (10 Total)
+## Commands (11 Total)
 
 ### Development Workflow
 
@@ -35,6 +35,12 @@ The `commands/` directory contains **custom OpenCode CLI extensions**. These com
 | Command | File | Purpose | Dependencies |
 |---------|------|---------|--------------|
 | **add-skill** | `add-skill.md` | Create a new skill doc under `.opencode/skills/` | `opencoder` |
+
+### Project Management
+
+| Command | File | Purpose | Dependencies |
+|---------|------|---------|--------------|
+| **create-jira-ticket** | `create-jira-ticket.md` | Create a new Jira ticket from task requirements | `requirement-manager` |
 
 ## What Are Commands?
 

@@ -23,18 +23,22 @@ Skills are:
 
 ## Skill Format
 
-Each skill is a directory containing a `SKILL.md` file:
+Each skill is a directory containing a `SKILL.md` file and a `codemaps.md` file:
 
 ```
 skills/
 ├── task-management/
-│   └── SKILL.md
+│   ├── SKILL.md
+│   └── codemaps.md
 ├── git-master/
-│   └── SKILL.md
+│   ├── SKILL.md
+│   └── codemaps.md
 ├── coding-standards/
-│   └── SKILL.md
+│   ├── SKILL.md
+│   └── codemaps.md
 └── iterative-retrieval/
-    └── SKILL.md
+    ├── SKILL.md
+    └── codemaps.md
 ```
 
 ## Loading Skills
@@ -49,12 +53,23 @@ When loaded, the skill content is injected into the conversation context, provid
 
 ## Skill Content Structure
 
-Each `SKILL.md` typically includes:
+Each skill directory contains:
+
+### SKILL.md
+The main skill instruction file that includes:
 - Domain overview and principles
 - Step-by-step workflows
 - Best practices and patterns
 - Common pitfalls to avoid
 - Examples and references
+
+### codemaps.md
+Documentation about the skill itself:
+- Overview and purpose
+- Key capabilities
+- When to use the skill
+- Usage examples
+- Relationships with other components
 
 ## Relationships
 

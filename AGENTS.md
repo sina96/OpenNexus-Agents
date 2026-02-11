@@ -20,7 +20,7 @@ For CI/automation, use non-interactive mode:
 ## Repository Structure
 
 ```
-OpenCoders-basic/
+OpenNexus-Agents/
 ├── core/
 │   ├── agents/
 │   │   ├── primary/      # Primary agents (OpenCoder, OpenBrainstorm, etc.)
@@ -140,6 +140,10 @@ Skills are reusable instruction modules that provide domain-specific workflows. 
 - `coding-standards`: Universal coding standards and best practices for TypeScript, JavaScript, React, and Node.js development
 - `iterative-retrieval`: Pattern for progressively refining context retrieval to solve the subagent context problem
 
+Each skill directory contains:
+- `SKILL.md`: Main skill instructions and workflows
+- `codemaps.md`: Code structure and implementation details
+
 Skills are loaded via the `skill` tool and inject detailed instructions into the conversation context.
 
 ## Commands
@@ -156,6 +160,7 @@ Custom commands extend OpenCode functionality. Located in `core/commands/` and i
 - `format-files`: Format files using OpenCode formatters
 - `learn`: Extract patterns and learnings from current session
 - `add-skill`: Create a new skill doc under .opencode/skills/
+- `create-jira-ticket`: Create a new Jira ticket from task requirements
 
 Commands are invoked via the OpenCode CLI or within agent workflows.
 

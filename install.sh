@@ -27,7 +27,7 @@ if [ -n "${SCRIPT_SOURCE}" ] && [ -e "${SCRIPT_SOURCE}" ]; then
 else
   # Piped execution (curl | bash): download from GitHub
   SCRIPT_DIR=""
-  RAW_URL="${OPENCODE_RAW_URL:-https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main}"
+  RAW_URL="${OPENCODE_RAW_URL:-https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main}"
 fi
 
 REGISTRY_JSONC_EXPLICIT=false
@@ -160,7 +160,7 @@ Env:
   REGISTRY_JSONC       Path to registry.jsonc (default: ./registry.jsonc)
   OPENCODE_INSTALL_DIR Install destination directory (default: <target>/.opencode)
   OPENCODE_TARGET_DIR  Project root directory (default: cwd)
-  OPENCODE_RAW_URL     Base URL for remote file downloads (default: https://raw.githubusercontent.com/sina96/OpenJarvis-Agents/main)
+  OPENCODE_RAW_URL     Base URL for remote file downloads (default: https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main)
 EOF
 }
 

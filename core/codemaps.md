@@ -11,7 +11,7 @@ The `core/` directory is the **source of truth** for all OpenCode components. It
 | Directory | Description | Contents Count |
 |-----------|-------------|----------------|
 | `agents/` | Agent definitions | 4 primary + 13 subagents |
-| `commands/` | Custom OpenCode CLI extensions | 10 commands |
+| `commands/` | Custom OpenCode CLI extensions | 11 commands |
 | `skills/` | Reusable instruction modules | 4 skills |
 
 ## Structure
@@ -48,7 +48,8 @@ core/
 │   ├── update-docs.md
 │   ├── format-files.md
 │   ├── learn.md
-│   └── add-skill.md
+│   ├── add-skill.md
+│   └── create-jira-ticket.md
 └── skills/
     ├── task-management/
     ├── git-master/
