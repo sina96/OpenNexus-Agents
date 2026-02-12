@@ -1886,6 +1886,9 @@ main() {
     if [ "$NON_INTERACTIVE_MODE" = "all" ]; then
       install_other_components
     fi
+
+    # Non-interactive: also create project config file
+    write_project_config
   fi
 
   echo ""

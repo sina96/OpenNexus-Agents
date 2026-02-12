@@ -44,7 +44,7 @@ For quick setup and CI/automation, use this one-liner to install all components 
 curl -fsSL https://raw.githubusercontent.com/sina96/OpenNexus-Agents/main/install.sh | bash -s -- --non-interactive-all
 ```
 
-> **Note:** This installs agents, subagents, commands, skills, and all other components without prompts. Suitable for quick setup and CI/automation. By default, non-interactive installation installs to the local project directory (`current-directory/.opencode`).
+> **Note:** This installs agents, subagents, commands, skills, and all other components without prompts. It also creates a local `opencode.jsonc` config file with `opennexus` as the default agent. Suitable for quick setup and CI/automation. By default, non-interactive installation installs to the local project directory (`current-directory/.opencode`).
 
 ### Non-Interactive Install Options
 
@@ -64,7 +64,7 @@ For automated environments or CI pipelines, the following non-interactive flags 
 ./install.sh --non-interactive-all
 ```
 
-> **Note:** Non-interactive mode automatically skips post-install steps (provider selection, MCP detection, model recommendations, config creation, gitignore updates). These steps only run in interactive mode.
+> **Note:** Non-interactive mode automatically skips interactive post-install steps (provider selection, MCP detection, model recommendations, gitignore updates). However, it still creates the `opencode.jsonc` config file. These interactive steps only run in interactive mode.
 
 ### Installation Location Options
 
